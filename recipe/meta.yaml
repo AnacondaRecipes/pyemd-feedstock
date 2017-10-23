@@ -14,23 +14,19 @@ source:
 build:
   number: 0
   script: python setup.py install --single-version-externally-managed --record=record.txt
-  skip: True  # [win32]
   features:
-    - vc9   # [win and py27]
-    - vc14  # [win and (py35 or py36)]
+    - vc{{ vc }}   # [win]
 
 requirements:
-  build:
-    - toolchain  # [unix]
+  host:
     - python
     - setuptools
-    - numpy x.x
-    - numpy >=1.9,<2.0.0
-
+    - numpy
+  build:
+    - {{ compiler('cxx') }}
   run:
     - python
-    - numpy x.x
-    - numpy >=1.9,<2.0.0
+    - {{ pin_compatible('numpy') }}
 
 test:
   requires:
