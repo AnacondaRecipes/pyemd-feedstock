@@ -38,12 +38,14 @@ requirements:
 test:
   requires:
     - pytest
-
+    - pip
+  imports:
+    - pyemd
   source_files:
     - test/
-
   commands:
     - pytest -v test/
+    - pip check
 
 about:
   home: https://github.com/wmayner/pyemd
