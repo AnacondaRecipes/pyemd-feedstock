@@ -23,6 +23,9 @@ requirements:
     - numpy   1.19  # [py<310]
     - numpy   1.21  # [py==310]
     - numpy   1.23  # [py>=311]
+    # see https://github.com/wmayner/pyemd/issues/59
+    - cython  0.29.33  # [py>=311]
+
 
   build:
     - {{ compiler('cxx') }}
