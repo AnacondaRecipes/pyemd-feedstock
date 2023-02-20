@@ -45,15 +45,16 @@ test:
     - pytest -v test/
 
 about:
-  home: http://github.com/wmayner/pyemd
+  home: https://github.com/wmayner/pyemd
   license: MIT
   license_file: LICENSE
+  license_family: MIT
   summary: A Python wrapper for the Earth Mover's Distance.
   description: |
     PyEMD is a Python wrapper for Ofir Pele and Michael Werman’s implementation
     of the Earth Mover’s Distance that allows it to be used with NumPy.
-  doc_url: http://github.com/wmayner/pyemd
-  dev_url: http://github.com/wmayner/pyemd
+  doc_url: https://github.com/wmayner/pyemd
+  dev_url: https://github.com/wmayner/pyemd
 
 extra:
   recipe-maintainers:
