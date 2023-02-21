@@ -12,14 +12,21 @@ source:
   sha256: {{ sha256sum }}
 
 build:
-  number: 0
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  number: 1
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
     - python
     - setuptools
-    - numpy
+    - wheel
+    - pip
+    - numpy   1.19  # [py<310]
+    - numpy   1.21  # [py==310]
+    - numpy   1.23  # [py>=311]
+    # see https://github.com/wmayner/pyemd/issues/59
+    - cython  0.29.33  # [py>=311]
+
 
   build:
     - {{ compiler('cxx') }}
@@ -31,23 +38,26 @@ requirements:
 test:
   requires:
     - pytest
-
+    - pip
+  imports:
+    - pyemd
   source_files:
     - test/
-
   commands:
     - pytest -v test/
+    - pip check
 
 about:
-  home: http://github.com/wmayner/pyemd
+  home: https://github.com/wmayner/pyemd
   license: MIT
   license_file: LICENSE
+  license_family: MIT
   summary: A Python wrapper for the Earth Mover's Distance.
   description: |
     PyEMD is a Python wrapper for Ofir Pele and Michael Werman’s implementation
     of the Earth Mover’s Distance that allows it to be used with NumPy.
-  doc_url: http://github.com/wmayner/pyemd
-  dev_url: http://github.com/wmayner/pyemd
+  doc_url: https://github.com/wmayner/pyemd
+  dev_url: https://github.com/wmayner/pyemd
 
 extra:
   recipe-maintainers:
