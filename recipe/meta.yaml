@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256sum }}
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
@@ -25,7 +25,7 @@ requirements:
     - numpy   1.21  # [py==310]
     - numpy   1.23  # [py>=311]
     # see https://github.com/wmayner/pyemd/issues/59
-    - cython  0.29.33  # [py>=311]
+    - cython 0.29  # [py>=311]
 
 
   build:
