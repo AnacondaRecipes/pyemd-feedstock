@@ -1,5 +1,5 @@
 {% set name = "pyemd" %}
-{% set version = "1.0.0" %}
+{% set version = "1.1.0" %}
 {% set sha256sum = "b42b5ae7b2d15b1d4dee63810ea798a39217e8a76b7b49c0eb63a84e0fd900fe" %}
 
 package:
@@ -8,28 +8,33 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256sum }}
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 81f5fe15cf6a0a410a18c448c0d3f19d0b5daa0f71c901bc403a01eb5f6000e7
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<39]
 
-requirements:  
+requirements:
   build:
     - {{ compiler('cxx') }}
   host:
     - python
-    - setuptools
     - setuptools_scm
-    - wheel
     - pip
     - packaging
     - numpy {{numpy}}
-    - cython 0.29
+    - cython >=3.0
+    - meson-python
+    - ninja
+    - numpy
+    - setuptools-scm >=8.0
   run:
     - python
     - {{ pin_compatible('numpy') }}
+    - numpy >=1.15.0
+    - pot >=0.9.0
 
 test:
   requires:
